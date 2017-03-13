@@ -34,20 +34,31 @@ var userType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The name of the user.',
     },
-    // friends: {
-    //   type: new GraphQLList(userType),
-    //   description: 'The friends of the user, or an empty list if they have none.',
-    //   resolve: (user, params, source, fieldASTs) => {
-    //     console.log('~~~~~~~', user, params, source, fieldASTs);
-    //     // var projections = getProjection(fieldASTs);
-    //     return User.find({
-    //       // _id: {
-    //       //   // to make it easily testable
-    //       //   $in: user.friends.map((id) => id.toString())
-    //       // }
-    //     }, projections);
-    //   },
-    // }
+    friends: {
+      type: new GraphQLList(userType),
+      description: 'The friends of the user, or an empty list if they have none.',
+      resolve: (user, params, source, fieldASTs) => {
+        console.log('~~~~~~~', user, params, source, fieldASTs);
+        // var projections = getProjection(fieldASTs);
+        // return User.find({
+        //   // _id: {
+        //   //   // to make it easily testable
+        //   //   $in: user.friends.map((id) => id.toString())
+        //   // }
+        // }, projections);
+          return new Promise((resolve, reject) => {
+              User.find({
+                  _id: {
+                    // to make it easily testable
+                    $in: user.friends.map((id) => id.toString())
+                  }
+              },function(err, users) {
+                  if (err) reject(err)
+                  else resolve(users)
+              })
+          })
+      },
+    }
   })
 });
 
