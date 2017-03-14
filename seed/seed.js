@@ -40,7 +40,6 @@ var users = [
 
 mongoose.connection.collections['users'].drop( function(err) {
 
-
     _.times(100000, ()=> {
         return new Promise((resolve, reject) => {
             const user = new User();
@@ -60,8 +59,7 @@ mongoose.connection.collections['users'].drop( function(err) {
         //
         // });
     });
-
-  User.create(users, function(err, res){
+  User.create(users, function(err, res) {
 
     if (err) {
       console.log(err);
