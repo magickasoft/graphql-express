@@ -40,7 +40,7 @@ var users = [
 
 mongoose.connection.collections['users'].drop( function(err) {
 
-    _.times(100000, ()=> {
+    _.times(100, ()=> {
         return new Promise((resolve, reject) => {
             const user = new User();
             user.name = `${Faker.name.firstName()} ${Faker.name.lastName()}`;
