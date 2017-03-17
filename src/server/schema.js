@@ -87,21 +87,30 @@ var schema = new GraphQLSchema({
               })
           }
       },
-      // user: {
-      //   type: userType,
-      //   args: {
-      //     id: {
-      //       name: 'id',
-      //       type: new GraphQLNonNull(GraphQLString)
-      //     }
-      //   },
-      //   resolve: (root, {id}, source, fieldASTs) => {
-      //     var projections = getProjection(fieldASTs);
-      //       console.log('~~~~~~~ RootQueryType', root, {id}, source, fieldASTs);
-      //     //return User.findById(id/*, projections*/);
-      //       return User.find({_id: id});
-      //   }
-      // }
+      user: {
+        type: userType,
+        args: {
+          id: {
+            name: 'id',
+            type: new GraphQLNonNull(GraphQLString)
+          }
+        },
+        resolve: (root, {id}, source, fieldASTs) => {
+          // var projections = getProjection(fieldASTs);
+          //   console.log('~~~~~~~ RootQueryType', root, {id}, source, fieldASTs);
+          // var projections = getProjection(fieldASTs);
+          //   console.log('~~~~~~~ RootQueryType', root, {id}, source, fieldASTs);
+          //return User.findById(id/*, projections*/);
+            console.log('~~~~~', id.toString())
+            return new Promise((resolve, reject) => {
+                User.findOne({_id: id.toString()},function(err, user) {
+                    if (err) reject(err)
+                    else resolve(user)
+                })
+            })
+            // return User.find({_id: id});
+        }
+      }
     }
   }),
   mutation: new GraphQLObjectType({
