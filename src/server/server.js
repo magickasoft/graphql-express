@@ -9,7 +9,7 @@ import GraphHTTP from 'express-graphql';
 import express from 'express';
 import bodyParser from 'body-parser';
 
-let port = process.env.PORT || 8080;
+let port = process.env.PORT || 3000;
 // let routes = new Router();
 // var app = koa();
 

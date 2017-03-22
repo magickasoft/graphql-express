@@ -34,6 +34,10 @@ var userType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The name of the user.',
     },
+    descript: {
+        type: GraphQLString,
+        description: 'The description of the user.',
+    },
     friends: {
       type: new GraphQLList(userType),
       description: 'The friends of the user, or an empty list if they have none.',

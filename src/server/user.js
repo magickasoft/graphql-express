@@ -4,6 +4,9 @@ var UserSchema = new mongoose.Schema({
   name: {
     type: String
   },
+  descript: {
+    type: String
+  },
   friends: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
